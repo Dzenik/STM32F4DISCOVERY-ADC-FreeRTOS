@@ -1,0 +1,527 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"main.c"
+  22              	.Ltext0:
+  23              		.cfi_sections	.debug_frame
+  24              		.global	adcValue
+  25              		.section	.bss.adcValue,"aw",%nobits
+  26              		.align	2
+  29              	adcValue:
+  30 0000 00000000 		.space	4
+  31              		.global	adcVoltage
+  32              		.section	.bss.adcVoltage,"aw",%nobits
+  33              		.align	2
+  36              	adcVoltage:
+  37 0000 00000000 		.space	4
+  38              		.section	.text.AdcTask,"ax",%progbits
+  39              		.align	2
+  40              		.thumb
+  41              		.thumb_func
+  43              	AdcTask:
+  44              	.LFB110:
+  45              		.file 1 "src/main.c"
+   1:src/main.c    **** /**
+   2:src/main.c    ****  * Copyright (C) 2013 Chetan Patil, http://chetanpatil.info
+   3:src/main.c    ****  * 
+   4:src/main.c    ****  * Permission is hereby granted, free of charge, to any person obtaining a copy
+   5:src/main.c    ****  * of this software and associated documentation files (the "Software"), to deal
+   6:src/main.c    ****  * in the Software without restriction, including without limitation the rights
+   7:src/main.c    ****  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+   8:src/main.c    ****  * copies of the Software, and to permit persons to whom the Software is
+   9:src/main.c    ****  * furnished to do so, subject to the following conditions:
+  10:src/main.c    ****  * 
+  11:src/main.c    ****  * The above copyright notice and this permission notice shall be included in
+  12:src/main.c    ****  * all copies or substantial portions of the Software.
+  13:src/main.c    ****  * 
+  14:src/main.c    ****  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  15:src/main.c    ****  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  16:src/main.c    ****  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  17:src/main.c    ****  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  18:src/main.c    ****  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  19:src/main.c    ****  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  20:src/main.c    ****  * THE SOFTWARE.
+  21:src/main.c    ****  * 
+  22:src/main.c    ****  * @author Chetan Patil | http://chetanpatil.info
+  23:src/main.c    ****  */
+  24:src/main.c    **** 
+  25:src/main.c    **** //Include required ST sytem header files, FreeRTOS header files & standar C libraries
+  26:src/main.c    **** #include "stm32f4xx.h"
+  27:src/main.c    **** #include "FreeRTOS.h"
+  28:src/main.c    **** #include "task.h"
+  29:src/main.c    **** #include <math.h>
+  30:src/main.c    **** #include <stdio.h>
+  31:src/main.c    **** #include <stdlib.h>
+  32:src/main.c    **** 
+  33:src/main.c    **** //Decalare variables to capture ADC conversion,convert to required voltage level and store it
+  34:src/main.c    **** uint32_t adcValue=0;
+  35:src/main.c    **** uint32_t adcVoltage=0;
+  36:src/main.c    **** 
+  37:src/main.c    **** //Task to handle ADC conversion
+  38:src/main.c    **** static void AdcTask(void *pvParameters){
+  46              		.loc 1 38 0
+  47              		.cfi_startproc
+  48              		@ args = 0, pretend = 0, frame = 8
+  49              		@ frame_needed = 1, uses_anonymous_args = 0
+  50 0000 80B5     		push	{r7, lr}
+  51              	.LCFI0:
+  52              		.cfi_def_cfa_offset 8
+  53 0002 82B0     		sub	sp, sp, #8
+  54              	.LCFI1:
+  55              		.cfi_def_cfa_offset 16
+  56 0004 00AF     		add	r7, sp, #0
+  57              		.cfi_offset 14, -4
+  58              		.cfi_offset 7, -8
+  59              	.LCFI2:
+  60              		.cfi_def_cfa_register 7
+  61 0006 7860     		str	r0, [r7, #4]
+  39:src/main.c    **** 
+  40:src/main.c    ****       	//ADC1 regular channel16 configuration
+  41:src/main.c    ****         ADC_RegularChannelConfig(ADC1, ADC_Channel_16, 1, ADC_SampleTime_3Cycles);
+  62              		.loc 1 41 0
+  63 0008 1948     		ldr	r0, .L4
+  64 000a 4FF01001 		mov	r1, #16
+  65 000e 4FF00102 		mov	r2, #1
+  66 0012 4FF00003 		mov	r3, #0
+  67 0016 FFF7FEFF 		bl	ADC_RegularChannelConfig
+  68              	.L3:
+  42:src/main.c    **** 
+  43:src/main.c    **** 	while(1){
+  44:src/main.c    **** 
+  45:src/main.c    **** 		//Start ADC1 Conversion
+  46:src/main.c    **** 		ADC_SoftwareStartConv(ADC1);
+  69              		.loc 1 46 0
+  70 001a 1548     		ldr	r0, .L4
+  71 001c FFF7FEFF 		bl	ADC_SoftwareStartConv
+  47:src/main.c    **** 
+  48:src/main.c    **** 		//NOTE :: Make sure that decimals value is being multipied with adcValue
+  49:src/main.c    **** 		adcValue= ADC_GetConversionValue(ADC1);
+  72              		.loc 1 49 0
+  73 0020 1348     		ldr	r0, .L4
+  74 0022 FFF7FEFF 		bl	ADC_GetConversionValue
+  75 0026 0346     		mov	r3, r0
+  76 0028 1A46     		mov	r2, r3
+  77 002a 124B     		ldr	r3, .L4+4
+  78 002c 1A60     		str	r2, [r3, #0]
+  50:src/main.c    **** 		adcVoltage = adcValue * (5.0/4096.0);
+  79              		.loc 1 50 0
+  80 002e 114B     		ldr	r3, .L4+4
+  81 0030 1B68     		ldr	r3, [r3, #0]
+  82 0032 07EE903A 		fmsr	s15, r3	@ int
+  83 0036 B8EE677A 		fuitos	s14, s15
+  84 003a DFED0F7A 		flds	s15, .L4+8
+  85 003e 67EE277A 		fmuls	s15, s14, s15
+  86 0042 FCEEE77A 		ftouizs	s15, s15
+  87 0046 17EE902A 		fmrs	r2, s15	@ int
+  88 004a 0C4B     		ldr	r3, .L4+12
+  89 004c 1A60     		str	r2, [r3, #0]
+  51:src/main.c    **** 
+  52:src/main.c    **** 		//Wait Until Transmit Finishes
+  53:src/main.c    **** 	        while (USART_GetFlagStatus(USART2, USART_FLAG_TXE) == RESET);
+  90              		.loc 1 53 0
+  91 004e 00BF     		nop
+  92              	.L2:
+  93              		.loc 1 53 0 is_stmt 0 discriminator 1
+  94 0050 0B48     		ldr	r0, .L4+16
+  95 0052 4FF08001 		mov	r1, #128
+  96 0056 FFF7FEFF 		bl	USART_GetFlagStatus
+  97 005a 0346     		mov	r3, r0
+  98 005c 002B     		cmp	r3, #0
+  99 005e F7D0     		beq	.L2
+  54:src/main.c    **** 		//Send the data to USART2
+  55:src/main.c    **** 			USART_SendData(USART2,adcVoltage);
+ 100              		.loc 1 55 0 is_stmt 1
+ 101 0060 064B     		ldr	r3, .L4+12
+ 102 0062 1B68     		ldr	r3, [r3, #0]
+ 103 0064 9BB2     		uxth	r3, r3
+ 104 0066 0648     		ldr	r0, .L4+16
+ 105 0068 1946     		mov	r1, r3
+ 106 006a FFF7FEFF 		bl	USART_SendData
+  56:src/main.c    **** 
+  57:src/main.c    **** 	}
+ 107              		.loc 1 57 0
+ 108 006e D4E7     		b	.L3
+ 109              	.L5:
+ 110              		.align	2
+ 111              	.L4:
+ 112 0070 00200140 		.word	1073815552
+ 113 0074 00000000 		.word	adcValue
+ 114 0078 0000A03A 		.word	983564288
+ 115 007c 00000000 		.word	adcVoltage
+ 116 0080 00440040 		.word	1073759232
+ 117              		.cfi_endproc
+ 118              	.LFE110:
+ 120              		.section	.text.initx,"ax",%progbits
+ 121              		.align	2
+ 122              		.global	initx
+ 123              		.thumb
+ 124              		.thumb_func
+ 126              	initx:
+ 127              	.LFB111:
+  58:src/main.c    **** 
+  59:src/main.c    **** }
+  60:src/main.c    **** 
+  61:src/main.c    **** //Initialise required ADC1, USART2 & GPIOS
+  62:src/main.c    **** void initx(void){
+ 128              		.loc 1 62 0
+ 129              		.cfi_startproc
+ 130              		@ args = 0, pretend = 0, frame = 64
+ 131              		@ frame_needed = 1, uses_anonymous_args = 0
+ 132 0000 80B5     		push	{r7, lr}
+ 133              	.LCFI3:
+ 134              		.cfi_def_cfa_offset 8
+ 135 0002 90B0     		sub	sp, sp, #64
+ 136              	.LCFI4:
+ 137              		.cfi_def_cfa_offset 72
+ 138 0004 00AF     		add	r7, sp, #0
+ 139              		.cfi_offset 14, -4
+ 140              		.cfi_offset 7, -8
+ 141              	.LCFI5:
+ 142              		.cfi_def_cfa_register 7
+  63:src/main.c    ****   
+  64:src/main.c    **** 	ADC_InitTypeDef ADC_InitStructure;
+  65:src/main.c    **** 	GPIO_InitTypeDef GPIO_InitStructure;
+  66:src/main.c    **** 	ADC_CommonInitTypeDef ADC_CommonInitStructure;
+  67:src/main.c    **** 	
+  68:src/main.c    **** 	
+  69:src/main.c    ****        	//Enable ADC1 
+  70:src/main.c    **** 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
+ 143              		.loc 1 70 0
+ 144 0006 4FF48070 		mov	r0, #256
+ 145 000a 4FF00101 		mov	r1, #1
+ 146 000e FFF7FEFF 		bl	RCC_APB2PeriphClockCmd
+  71:src/main.c    **** 
+  72:src/main.c    **** 	//Enable the ADC1 GPIO Clock	
+  73:src/main.c    ****       	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE); 
+ 147              		.loc 1 73 0
+ 148 0012 4FF00100 		mov	r0, #1
+ 149 0016 4FF00101 		mov	r1, #1
+ 150 001a FFF7FEFF 		bl	RCC_AHB1PeriphClockCmd
+  74:src/main.c    **** 
+  75:src/main.c    **** 	//Initializing GPIO for ADC
+  76:src/main.c    **** 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;
+ 151              		.loc 1 76 0
+ 152 001e 4FF02003 		mov	r3, #32
+ 153 0022 3B62     		str	r3, [r7, #32]
+  77:src/main.c    **** 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AN;
+ 154              		.loc 1 77 0
+ 155 0024 4FF00303 		mov	r3, #3
+ 156 0028 87F82430 		strb	r3, [r7, #36]
+  78:src/main.c    **** 	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+ 157              		.loc 1 78 0
+ 158 002c 4FF00003 		mov	r3, #0
+ 159 0030 87F82630 		strb	r3, [r7, #38]
+  79:src/main.c    **** 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
+ 160              		.loc 1 79 0
+ 161 0034 4FF00303 		mov	r3, #3
+ 162 0038 87F82530 		strb	r3, [r7, #37]
+  80:src/main.c    **** 	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+ 163              		.loc 1 80 0
+ 164 003c 4FF00003 		mov	r3, #0
+ 165 0040 87F82730 		strb	r3, [r7, #39]
+  81:src/main.c    **** 
+  82:src/main.c    **** 	//Initializing GPIO 
+  83:src/main.c    **** 	GPIO_Init(GPIOC, &GPIO_InitStructure);
+ 166              		.loc 1 83 0
+ 167 0044 07F12003 		add	r3, r7, #32
+ 168 0048 4248     		ldr	r0, .L7
+ 169 004a 1946     		mov	r1, r3
+ 170 004c FFF7FEFF 		bl	GPIO_Init
+  84:src/main.c    **** 
+  85:src/main.c    **** 	//ADC Common Init
+  86:src/main.c    **** 
+  87:src/main.c    **** 	//Use Independent mode
+  88:src/main.c    **** 	ADC_CommonInitStructure.ADC_Mode = ADC_Mode_Independent;
+ 171              		.loc 1 88 0
+ 172 0050 4FF00003 		mov	r3, #0
+ 173 0054 3B61     		str	r3, [r7, #16]
+  89:src/main.c    **** 	ADC_CommonInitStructure.ADC_Prescaler = ADC_Prescaler_Div2;
+ 174              		.loc 1 89 0
+ 175 0056 4FF00003 		mov	r3, #0
+ 176 005a 7B61     		str	r3, [r7, #20]
+  90:src/main.c    **** 	ADC_CommonInitStructure.ADC_DMAAccessMode = ADC_DMAAccessMode_Disabled;
+ 177              		.loc 1 90 0
+ 178 005c 4FF00003 		mov	r3, #0
+ 179 0060 BB61     		str	r3, [r7, #24]
+  91:src/main.c    **** 	ADC_CommonInitStructure.ADC_TwoSamplingDelay = ADC_TwoSamplingDelay_5Cycles;
+ 180              		.loc 1 91 0
+ 181 0062 4FF00003 		mov	r3, #0
+ 182 0066 FB61     		str	r3, [r7, #28]
+  92:src/main.c    **** 	ADC_CommonInit(&ADC_CommonInitStructure);
+ 183              		.loc 1 92 0
+ 184 0068 07F11003 		add	r3, r7, #16
+ 185 006c 1846     		mov	r0, r3
+ 186 006e FFF7FEFF 		bl	ADC_CommonInit
+  93:src/main.c    **** 
+  94:src/main.c    **** 	//ADC1 Init
+  95:src/main.c    **** 	ADC_InitStructure.ADC_Resolution = ADC_Resolution_12b;
+ 187              		.loc 1 95 0
+ 188 0072 4FF00003 		mov	r3, #0
+ 189 0076 BB62     		str	r3, [r7, #40]
+  96:src/main.c    **** 	ADC_InitStructure.ADC_ScanConvMode = DISABLE;
+ 190              		.loc 1 96 0
+ 191 0078 4FF00003 		mov	r3, #0
+ 192 007c 87F82C30 		strb	r3, [r7, #44]
+  97:src/main.c    **** 	ADC_InitStructure.ADC_ContinuousConvMode = DISABLE;
+ 193              		.loc 1 97 0
+ 194 0080 4FF00003 		mov	r3, #0
+ 195 0084 87F82D30 		strb	r3, [r7, #45]
+  98:src/main.c    **** 	ADC_InitStructure.ADC_ExternalTrigConvEdge = ADC_ExternalTrigConvEdge_None;
+ 196              		.loc 1 98 0
+ 197 0088 4FF00003 		mov	r3, #0
+ 198 008c 3B63     		str	r3, [r7, #48]
+  99:src/main.c    **** 	ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
+ 199              		.loc 1 99 0
+ 200 008e 4FF00003 		mov	r3, #0
+ 201 0092 BB63     		str	r3, [r7, #56]
+ 100:src/main.c    **** 	ADC_InitStructure.ADC_NbrOfConversion = 1;
+ 202              		.loc 1 100 0
+ 203 0094 4FF00103 		mov	r3, #1
+ 204 0098 87F83C30 		strb	r3, [r7, #60]
+ 101:src/main.c    **** 	ADC_Init(ADC1, &ADC_InitStructure);
+ 205              		.loc 1 101 0
+ 206 009c 07F12803 		add	r3, r7, #40
+ 207 00a0 2D48     		ldr	r0, .L7+4
+ 208 00a2 1946     		mov	r1, r3
+ 209 00a4 FFF7FEFF 		bl	ADC_Init
+ 102:src/main.c    **** 
+ 103:src/main.c    **** 	//Enabling Temperature sensor
+ 104:src/main.c    **** 	ADC_TempSensorVrefintCmd(ENABLE);
+ 210              		.loc 1 104 0
+ 211 00a8 4FF00100 		mov	r0, #1
+ 212 00ac FFF7FEFF 		bl	ADC_TempSensorVrefintCmd
+ 105:src/main.c    **** 
+ 106:src/main.c    **** 	//Enable ADC1
+ 107:src/main.c    **** 	ADC_Cmd(ADC1, ENABLE);
+ 213              		.loc 1 107 0
+ 214 00b0 2948     		ldr	r0, .L7+4
+ 215 00b2 4FF00101 		mov	r1, #1
+ 216 00b6 FFF7FEFF 		bl	ADC_Cmd
+ 108:src/main.c    **** 
+ 109:src/main.c    **** 	//Structure With Data For USART Configuration
+ 110:src/main.c    **** 	USART_InitTypeDef USART_InitStructure;
+ 111:src/main.c    **** 
+ 112:src/main.c    **** 	//Setup USART2 TX Pin As Alternate Function
+ 113:src/main.c    **** 	GPIO_PinAFConfig(GPIOA, GPIO_PinSource2, GPIO_AF_USART2);
+ 217              		.loc 1 113 0
+ 218 00ba 2848     		ldr	r0, .L7+8
+ 219 00bc 4FF00201 		mov	r1, #2
+ 220 00c0 4FF00702 		mov	r2, #7
+ 221 00c4 FFF7FEFF 		bl	GPIO_PinAFConfig
+ 114:src/main.c    ****         GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
+ 222              		.loc 1 114 0
+ 223 00c8 4FF00403 		mov	r3, #4
+ 224 00cc 3B62     		str	r3, [r7, #32]
+ 115:src/main.c    ****         GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+ 225              		.loc 1 115 0
+ 226 00ce 4FF00203 		mov	r3, #2
+ 227 00d2 87F82430 		strb	r3, [r7, #36]
+ 116:src/main.c    ****         GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+ 228              		.loc 1 116 0
+ 229 00d6 4FF00003 		mov	r3, #0
+ 230 00da 87F82630 		strb	r3, [r7, #38]
+ 117:src/main.c    ****         GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
+ 231              		.loc 1 117 0
+ 232 00de 4FF00103 		mov	r3, #1
+ 233 00e2 87F82730 		strb	r3, [r7, #39]
+ 118:src/main.c    ****         GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+ 234              		.loc 1 118 0
+ 235 00e6 4FF00203 		mov	r3, #2
+ 236 00ea 87F82530 		strb	r3, [r7, #37]
+ 119:src/main.c    ****         GPIO_Init(GPIOA, &GPIO_InitStructure);
+ 237              		.loc 1 119 0
+ 238 00ee 07F12003 		add	r3, r7, #32
+ 239 00f2 1A48     		ldr	r0, .L7+8
+ 240 00f4 1946     		mov	r1, r3
+ 241 00f6 FFF7FEFF 		bl	GPIO_Init
+ 120:src/main.c    **** 
+ 121:src/main.c    **** 	//Enable GPIO Clocks For USART2
+ 122:src/main.c    **** 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
+ 242              		.loc 1 122 0
+ 243 00fa 4FF00100 		mov	r0, #1
+ 244 00fe 4FF00101 		mov	r1, #1
+ 245 0102 FFF7FEFF 		bl	RCC_AHB1PeriphClockCmd
+ 123:src/main.c    **** 
+ 124:src/main.c    **** 	//Enable Clocks for USART2
+ 125:src/main.c    **** 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
+ 246              		.loc 1 125 0
+ 247 0106 4FF40030 		mov	r0, #131072
+ 248 010a 4FF00101 		mov	r1, #1
+ 249 010e FFF7FEFF 		bl	RCC_APB1PeriphClockCmd
+ 126:src/main.c    **** 
+ 127:src/main.c    **** 	//USART Parameters
+ 128:src/main.c    **** 	USART_InitStructure.USART_BaudRate = 38400;
+ 250              		.loc 1 128 0
+ 251 0112 4FF41643 		mov	r3, #38400
+ 252 0116 3B60     		str	r3, [r7, #0]
+ 129:src/main.c    **** 	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+ 253              		.loc 1 129 0
+ 254 0118 4FF00003 		mov	r3, #0
+ 255 011c BB80     		strh	r3, [r7, #4]	@ movhi
+ 130:src/main.c    ****         USART_InitStructure.USART_StopBits = USART_StopBits_1;
+ 256              		.loc 1 130 0
+ 257 011e 4FF00003 		mov	r3, #0
+ 258 0122 FB80     		strh	r3, [r7, #6]	@ movhi
+ 131:src/main.c    ****         USART_InitStructure.USART_Parity = USART_Parity_No ;
+ 259              		.loc 1 131 0
+ 260 0124 4FF00003 		mov	r3, #0
+ 261 0128 3B81     		strh	r3, [r7, #8]	@ movhi
+ 132:src/main.c    ****         USART_InitStructure.USART_Mode = USART_Mode_Tx;
+ 262              		.loc 1 132 0
+ 263 012a 4FF00803 		mov	r3, #8
+ 264 012e 7B81     		strh	r3, [r7, #10]	@ movhi
+ 133:src/main.c    ****         USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+ 265              		.loc 1 133 0
+ 266 0130 4FF00003 		mov	r3, #0
+ 267 0134 BB81     		strh	r3, [r7, #12]	@ movhi
+ 134:src/main.c    **** 
+ 135:src/main.c    **** 	//Configuring And Enabling USART2
+ 136:src/main.c    **** 	USART_Init(USART2,&USART_InitStructure);
+ 268              		.loc 1 136 0
+ 269 0136 3B46     		mov	r3, r7
+ 270 0138 0948     		ldr	r0, .L7+12
+ 271 013a 1946     		mov	r1, r3
+ 272 013c FFF7FEFF 		bl	USART_Init
+ 137:src/main.c    ****         USART_Cmd(USART2, ENABLE);
+ 273              		.loc 1 137 0
+ 274 0140 0748     		ldr	r0, .L7+12
+ 275 0142 4FF00101 		mov	r1, #1
+ 276 0146 FFF7FEFF 		bl	USART_Cmd
+ 138:src/main.c    **** 
+ 139:src/main.c    **** 	//Comment out below line if you need full FPU support	
+ 140:src/main.c    **** 	//SCB->CPACR |= ((3UL << 10*2)|(3UL << 11*2)); 
+ 141:src/main.c    **** 
+ 142:src/main.c    **** }
+ 277              		.loc 1 142 0
+ 278 014a 07F14007 		add	r7, r7, #64
+ 279 014e BD46     		mov	sp, r7
+ 280 0150 80BD     		pop	{r7, pc}
+ 281              	.L8:
+ 282 0152 00BF     		.align	2
+ 283              	.L7:
+ 284 0154 00080240 		.word	1073874944
+ 285 0158 00200140 		.word	1073815552
+ 286 015c 00000240 		.word	1073872896
+ 287 0160 00440040 		.word	1073759232
+ 288              		.cfi_endproc
+ 289              	.LFE111:
+ 291              		.section	.rodata
+ 292              		.align	2
+ 293              	.LC0:
+ 294 0000 41646354 		.ascii	"AdcTask\000"
+ 294      61736B00 
+ 295              		.section	.text.main,"ax",%progbits
+ 296              		.align	2
+ 297              		.global	main
+ 298              		.thumb
+ 299              		.thumb_func
+ 301              	main:
+ 302              	.LFB112:
+ 143:src/main.c    **** 
+ 144:src/main.c    **** int main(void){
+ 303              		.loc 1 144 0
+ 304              		.cfi_startproc
+ 305              		@ args = 0, pretend = 0, frame = 0
+ 306              		@ frame_needed = 1, uses_anonymous_args = 0
+ 307 0000 80B5     		push	{r7, lr}
+ 308              	.LCFI6:
+ 309              		.cfi_def_cfa_offset 8
+ 310 0002 84B0     		sub	sp, sp, #16
+ 311              	.LCFI7:
+ 312              		.cfi_def_cfa_offset 24
+ 313 0004 04AF     		add	r7, sp, #16
+ 314              		.cfi_offset 14, -4
+ 315              		.cfi_offset 7, -8
+ 316              	.LCFI8:
+ 317              		.cfi_def_cfa 7, 8
+ 145:src/main.c    **** 
+ 146:src/main.c    **** 	//Call initialize
+ 147:src/main.c    **** 	initx();
+ 318              		.loc 1 147 0
+ 319 0006 FFF7FEFF 		bl	initx
+ 148:src/main.c    **** 	
+ 149:src/main.c    **** 	//AdcTask to capture data from Temperature Sensor and convert to Digital
+ 150:src/main.c    **** 	xTaskCreate(AdcTask, (signed char*)"AdcTask", 128, NULL, tskIDLE_PRIORITY+1, NULL);
+ 320              		.loc 1 150 0
+ 321 000a 0E4B     		ldr	r3, .L10
+ 322 000c 4FF00102 		mov	r2, #1
+ 323 0010 0092     		str	r2, [sp, #0]
+ 324 0012 4FF00002 		mov	r2, #0
+ 325 0016 0192     		str	r2, [sp, #4]
+ 326 0018 4FF00002 		mov	r2, #0
+ 327 001c 0292     		str	r2, [sp, #8]
+ 328 001e 4FF00002 		mov	r2, #0
+ 329 0022 0392     		str	r2, [sp, #12]
+ 330 0024 0848     		ldr	r0, .L10+4
+ 331 0026 1946     		mov	r1, r3
+ 332 0028 4FF08002 		mov	r2, #128
+ 333 002c 4FF00003 		mov	r3, #0
+ 334 0030 FFF7FEFF 		bl	xTaskGenericCreate
+ 151:src/main.c    **** 
+ 152:src/main.c    **** 	//Give control scheduler
+ 153:src/main.c    **** 	vTaskStartScheduler();
+ 335              		.loc 1 153 0
+ 336 0034 FFF7FEFF 		bl	vTaskStartScheduler
+ 337 0038 4FF00003 		mov	r3, #0
+ 154:src/main.c    **** 
+ 155:src/main.c    **** }
+ 338              		.loc 1 155 0
+ 339 003c 1846     		mov	r0, r3
+ 340 003e BD46     		mov	sp, r7
+ 341 0040 80BD     		pop	{r7, pc}
+ 342              	.L11:
+ 343 0042 00BF     		.align	2
+ 344              	.L10:
+ 345 0044 00000000 		.word	.LC0
+ 346 0048 00000000 		.word	AdcTask
+ 347              		.cfi_endproc
+ 348              	.LFE112:
+ 350              		.text
+ 351              	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+     /tmp/ccYpwliE.s:29     .bss.adcValue:00000000 adcValue
+     /tmp/ccYpwliE.s:26     .bss.adcValue:00000000 $d
+     /tmp/ccYpwliE.s:36     .bss.adcVoltage:00000000 adcVoltage
+     /tmp/ccYpwliE.s:33     .bss.adcVoltage:00000000 $d
+     /tmp/ccYpwliE.s:39     .text.AdcTask:00000000 $t
+     /tmp/ccYpwliE.s:43     .text.AdcTask:00000000 AdcTask
+     /tmp/ccYpwliE.s:112    .text.AdcTask:00000070 $d
+     /tmp/ccYpwliE.s:121    .text.initx:00000000 $t
+     /tmp/ccYpwliE.s:126    .text.initx:00000000 initx
+     /tmp/ccYpwliE.s:284    .text.initx:00000154 $d
+     /tmp/ccYpwliE.s:292    .rodata:00000000 $d
+     /tmp/ccYpwliE.s:296    .text.main:00000000 $t
+     /tmp/ccYpwliE.s:301    .text.main:00000000 main
+     /tmp/ccYpwliE.s:345    .text.main:00000044 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+ADC_RegularChannelConfig
+ADC_SoftwareStartConv
+ADC_GetConversionValue
+USART_GetFlagStatus
+USART_SendData
+RCC_APB2PeriphClockCmd
+RCC_AHB1PeriphClockCmd
+GPIO_Init
+ADC_CommonInit
+ADC_Init
+ADC_TempSensorVrefintCmd
+ADC_Cmd
+GPIO_PinAFConfig
+RCC_APB1PeriphClockCmd
+USART_Init
+USART_Cmd
+xTaskGenericCreate
+vTaskStartScheduler
