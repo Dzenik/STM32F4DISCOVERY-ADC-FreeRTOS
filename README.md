@@ -1,7 +1,7 @@
 Example Code For Using Analog To Digital Conversion on STM32F4DISCOVERY (Cortex M4-F) Using FreeRTOS
 ========================
 
-This is contains example code and project for compiling and porting to STM32F4DISCOVERY.
+This is contains example code (check : src/main.c) and project for compiling and porting to STM32F4DISCOVERY.
 
 The project was tested on a STM32F4 Discovery board.
 
