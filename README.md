@@ -32,6 +32,11 @@ Running & Debugging
 This code was ported to STM32F4DISCOVERY using st-link : <https://github.com/texane/stlink>
 Configure and follow instruction at above link on how to flash and debug it.
 
+Credit
+------
+
+Credit to Thomas Kindler on sharing FreeRTOS port demo : <https://github.com/thomask77/STM32F4_demo>
+
 License
 -------
 
