@@ -526,16 +526,16 @@
  354              	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 list.c
-     /tmp/ccaEpKHo.s:25     .text.vListInitialise:00000000 $t
-     /tmp/ccaEpKHo.s:30     .text.vListInitialise:00000000 vListInitialise
-     /tmp/ccaEpKHo.s:84     .text.vListInitialiseItem:00000000 $t
-     /tmp/ccaEpKHo.s:89     .text.vListInitialiseItem:00000000 vListInitialiseItem
-     /tmp/ccaEpKHo.s:120    .text.vListInsertEnd:00000000 $t
-     /tmp/ccaEpKHo.s:125    .text.vListInsertEnd:00000000 vListInsertEnd
-     /tmp/ccaEpKHo.s:190    .text.vListInsert:00000000 $t
-     /tmp/ccaEpKHo.s:195    .text.vListInsert:00000000 vListInsert
-     /tmp/ccaEpKHo.s:284    .text.vListRemove:00000000 $t
-     /tmp/ccaEpKHo.s:289    .text.vListRemove:00000000 vListRemove
+     /tmp/ccKcTI94.s:25     .text.vListInitialise:00000000 $t
+     /tmp/ccKcTI94.s:30     .text.vListInitialise:00000000 vListInitialise
+     /tmp/ccKcTI94.s:84     .text.vListInitialiseItem:00000000 $t
+     /tmp/ccKcTI94.s:89     .text.vListInitialiseItem:00000000 vListInitialiseItem
+     /tmp/ccKcTI94.s:120    .text.vListInsertEnd:00000000 $t
+     /tmp/ccKcTI94.s:125    .text.vListInsertEnd:00000000 vListInsertEnd
+     /tmp/ccKcTI94.s:190    .text.vListInsert:00000000 $t
+     /tmp/ccKcTI94.s:195    .text.vListInsert:00000000 vListInsert
+     /tmp/ccKcTI94.s:284    .text.vListRemove:00000000 $t
+     /tmp/ccKcTI94.s:289    .text.vListRemove:00000000 vListRemove
                      .debug_frame:00000010 $d
 
 NO UNDEFINED SYMBOLS

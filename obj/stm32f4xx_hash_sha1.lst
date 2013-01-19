@@ -1349,10 +1349,10 @@
  690              	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_hash_sha1.c
-     /tmp/ccdwZ5Vd.s:25     .text.HASH_SHA1:00000000 $t
-     /tmp/ccdwZ5Vd.s:30     .text.HASH_SHA1:00000000 HASH_SHA1
-     /tmp/ccdwZ5Vd.s:282    .text.HMAC_SHA1:00000000 $t
-     /tmp/ccdwZ5Vd.s:287    .text.HMAC_SHA1:00000000 HMAC_SHA1
+     /tmp/cct1rRWQ.s:25     .text.HASH_SHA1:00000000 $t
+     /tmp/cct1rRWQ.s:30     .text.HASH_SHA1:00000000 HASH_SHA1
+     /tmp/cct1rRWQ.s:282    .text.HMAC_SHA1:00000000 $t
+     /tmp/cct1rRWQ.s:287    .text.HMAC_SHA1:00000000 HMAC_SHA1
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

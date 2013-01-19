@@ -567,21 +567,21 @@
  353              	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 misc.c
-     /tmp/ccLPtjHN.s:25     .text.NVIC_PriorityGroupConfig:00000000 $t
-     /tmp/ccLPtjHN.s:30     .text.NVIC_PriorityGroupConfig:00000000 NVIC_PriorityGroupConfig
-     /tmp/ccLPtjHN.s:63     .text.NVIC_PriorityGroupConfig:00000020 $d
-     /tmp/ccLPtjHN.s:68     .text.NVIC_Init:00000000 $t
-     /tmp/ccLPtjHN.s:73     .text.NVIC_Init:00000000 NVIC_Init
-     /tmp/ccLPtjHN.s:186    .text.NVIC_Init:000000d0 $d
-     /tmp/ccLPtjHN.s:192    .text.NVIC_SetVectorTable:00000000 $t
-     /tmp/ccLPtjHN.s:197    .text.NVIC_SetVectorTable:00000000 NVIC_SetVectorTable
-     /tmp/ccLPtjHN.s:232    .text.NVIC_SetVectorTable:00000028 $d
-     /tmp/ccLPtjHN.s:237    .text.NVIC_SystemLPConfig:00000000 $t
-     /tmp/ccLPtjHN.s:242    .text.NVIC_SystemLPConfig:00000000 NVIC_SystemLPConfig
-     /tmp/ccLPtjHN.s:293    .text.NVIC_SystemLPConfig:00000040 $d
-     /tmp/ccLPtjHN.s:298    .text.SysTick_CLKSourceConfig:00000000 $t
-     /tmp/ccLPtjHN.s:303    .text.SysTick_CLKSourceConfig:00000000 SysTick_CLKSourceConfig
-     /tmp/ccLPtjHN.s:348    .text.SysTick_CLKSourceConfig:00000034 $d
+     /tmp/ccwo1h5m.s:25     .text.NVIC_PriorityGroupConfig:00000000 $t
+     /tmp/ccwo1h5m.s:30     .text.NVIC_PriorityGroupConfig:00000000 NVIC_PriorityGroupConfig
+     /tmp/ccwo1h5m.s:63     .text.NVIC_PriorityGroupConfig:00000020 $d
+     /tmp/ccwo1h5m.s:68     .text.NVIC_Init:00000000 $t
+     /tmp/ccwo1h5m.s:73     .text.NVIC_Init:00000000 NVIC_Init
+     /tmp/ccwo1h5m.s:186    .text.NVIC_Init:000000d0 $d
+     /tmp/ccwo1h5m.s:192    .text.NVIC_SetVectorTable:00000000 $t
+     /tmp/ccwo1h5m.s:197    .text.NVIC_SetVectorTable:00000000 NVIC_SetVectorTable
+     /tmp/ccwo1h5m.s:232    .text.NVIC_SetVectorTable:00000028 $d
+     /tmp/ccwo1h5m.s:237    .text.NVIC_SystemLPConfig:00000000 $t
+     /tmp/ccwo1h5m.s:242    .text.NVIC_SystemLPConfig:00000000 NVIC_SystemLPConfig
+     /tmp/ccwo1h5m.s:293    .text.NVIC_SystemLPConfig:00000040 $d
+     /tmp/ccwo1h5m.s:298    .text.SysTick_CLKSourceConfig:00000000 $t
+     /tmp/ccwo1h5m.s:303    .text.SysTick_CLKSourceConfig:00000000 SysTick_CLKSourceConfig
+     /tmp/ccwo1h5m.s:348    .text.SysTick_CLKSourceConfig:00000034 $d
                      .debug_frame:00000010 $d
 
 NO UNDEFINED SYMBOLS

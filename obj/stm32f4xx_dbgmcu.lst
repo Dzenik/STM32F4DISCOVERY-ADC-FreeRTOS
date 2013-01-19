@@ -422,21 +422,21 @@
  279              	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_dbgmcu.c
-     /tmp/ccRpM0F6.s:25     .text.DBGMCU_GetREVID:00000000 $t
-     /tmp/ccRpM0F6.s:30     .text.DBGMCU_GetREVID:00000000 DBGMCU_GetREVID
-     /tmp/ccRpM0F6.s:57     .text.DBGMCU_GetREVID:00000014 $d
-     /tmp/ccRpM0F6.s:62     .text.DBGMCU_GetDEVID:00000000 $t
-     /tmp/ccRpM0F6.s:67     .text.DBGMCU_GetDEVID:00000000 DBGMCU_GetDEVID
-     /tmp/ccRpM0F6.s:94     .text.DBGMCU_GetDEVID:00000018 $d
-     /tmp/ccRpM0F6.s:99     .text.DBGMCU_Config:00000000 $t
-     /tmp/ccRpM0F6.s:104    .text.DBGMCU_Config:00000000 DBGMCU_Config
-     /tmp/ccRpM0F6.s:154    .text.DBGMCU_Config:00000040 $d
-     /tmp/ccRpM0F6.s:159    .text.DBGMCU_APB1PeriphConfig:00000000 $t
-     /tmp/ccRpM0F6.s:164    .text.DBGMCU_APB1PeriphConfig:00000000 DBGMCU_APB1PeriphConfig
-     /tmp/ccRpM0F6.s:214    .text.DBGMCU_APB1PeriphConfig:00000040 $d
-     /tmp/ccRpM0F6.s:219    .text.DBGMCU_APB2PeriphConfig:00000000 $t
-     /tmp/ccRpM0F6.s:224    .text.DBGMCU_APB2PeriphConfig:00000000 DBGMCU_APB2PeriphConfig
-     /tmp/ccRpM0F6.s:274    .text.DBGMCU_APB2PeriphConfig:00000040 $d
+     /tmp/cc7YmW8K.s:25     .text.DBGMCU_GetREVID:00000000 $t
+     /tmp/cc7YmW8K.s:30     .text.DBGMCU_GetREVID:00000000 DBGMCU_GetREVID
+     /tmp/cc7YmW8K.s:57     .text.DBGMCU_GetREVID:00000014 $d
+     /tmp/cc7YmW8K.s:62     .text.DBGMCU_GetDEVID:00000000 $t
+     /tmp/cc7YmW8K.s:67     .text.DBGMCU_GetDEVID:00000000 DBGMCU_GetDEVID
+     /tmp/cc7YmW8K.s:94     .text.DBGMCU_GetDEVID:00000018 $d
+     /tmp/cc7YmW8K.s:99     .text.DBGMCU_Config:00000000 $t
+     /tmp/cc7YmW8K.s:104    .text.DBGMCU_Config:00000000 DBGMCU_Config
+     /tmp/cc7YmW8K.s:154    .text.DBGMCU_Config:00000040 $d
+     /tmp/cc7YmW8K.s:159    .text.DBGMCU_APB1PeriphConfig:00000000 $t
+     /tmp/cc7YmW8K.s:164    .text.DBGMCU_APB1PeriphConfig:00000000 DBGMCU_APB1PeriphConfig
+     /tmp/cc7YmW8K.s:214    .text.DBGMCU_APB1PeriphConfig:00000040 $d
+     /tmp/cc7YmW8K.s:219    .text.DBGMCU_APB2PeriphConfig:00000000 $t
+     /tmp/cc7YmW8K.s:224    .text.DBGMCU_APB2PeriphConfig:00000000 DBGMCU_APB2PeriphConfig
+     /tmp/cc7YmW8K.s:274    .text.DBGMCU_APB2PeriphConfig:00000040 $d
                      .debug_frame:00000010 $d
 
 NO UNDEFINED SYMBOLS

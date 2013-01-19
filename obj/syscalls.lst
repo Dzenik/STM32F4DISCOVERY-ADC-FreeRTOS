@@ -1083,34 +1083,34 @@
  568              	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 syscalls.c
-     /tmp/cceb7PyU.s:29     .data.__malloc_margin:00000000 __malloc_margin
-     /tmp/cceb7PyU.s:26     .data.__malloc_margin:00000000 $d
+     /tmp/ccddODfo.s:29     .data.__malloc_margin:00000000 __malloc_margin
+     /tmp/ccddODfo.s:26     .data.__malloc_margin:00000000 $d
                             *COM*:00000004 __brkval
-     /tmp/cceb7PyU.s:33     .text._exit:00000000 $t
-     /tmp/cceb7PyU.s:38     .text._exit:00000000 _exit
-     /tmp/cceb7PyU.s:64     .text._read_r:00000000 $t
-     /tmp/cceb7PyU.s:69     .text._read_r:00000000 _read_r
-     /tmp/cceb7PyU.s:106    .text._write_r:00000000 $t
-     /tmp/cceb7PyU.s:111    .text._write_r:00000000 _write_r
-     /tmp/cceb7PyU.s:148    .text._lseek_r:00000000 $t
-     /tmp/cceb7PyU.s:153    .text._lseek_r:00000000 _lseek_r
-     /tmp/cceb7PyU.s:190    .text._close_r:00000000 $t
-     /tmp/cceb7PyU.s:195    .text._close_r:00000000 _close_r
-     /tmp/cceb7PyU.s:230    .text._fstat_r:00000000 $t
-     /tmp/cceb7PyU.s:235    .text._fstat_r:00000000 _fstat_r
-     /tmp/cceb7PyU.s:288    .text._isatty_r:00000000 $t
-     /tmp/cceb7PyU.s:293    .text._isatty_r:00000000 _isatty_r
-     /tmp/cceb7PyU.s:324    .text._sbrk_r:00000000 $t
-     /tmp/cceb7PyU.s:329    .text._sbrk_r:00000000 _sbrk_r
-     /tmp/cceb7PyU.s:415    .text._sbrk_r:00000060 $d
-     /tmp/cceb7PyU.s:422    .text._kill_r:00000000 $t
-     /tmp/cceb7PyU.s:427    .text._kill_r:00000000 _kill_r
-     /tmp/cceb7PyU.s:463    .text._getpid_r:00000000 $t
-     /tmp/cceb7PyU.s:468    .text._getpid_r:00000000 _getpid_r
-     /tmp/cceb7PyU.s:502    .text.__malloc_lock:00000000 $t
-     /tmp/cceb7PyU.s:507    .text.__malloc_lock:00000000 __malloc_lock
-     /tmp/cceb7PyU.s:535    .text.__malloc_unlock:00000000 $t
-     /tmp/cceb7PyU.s:540    .text.__malloc_unlock:00000000 __malloc_unlock
+     /tmp/ccddODfo.s:33     .text._exit:00000000 $t
+     /tmp/ccddODfo.s:38     .text._exit:00000000 _exit
+     /tmp/ccddODfo.s:64     .text._read_r:00000000 $t
+     /tmp/ccddODfo.s:69     .text._read_r:00000000 _read_r
+     /tmp/ccddODfo.s:106    .text._write_r:00000000 $t
+     /tmp/ccddODfo.s:111    .text._write_r:00000000 _write_r
+     /tmp/ccddODfo.s:148    .text._lseek_r:00000000 $t
+     /tmp/ccddODfo.s:153    .text._lseek_r:00000000 _lseek_r
+     /tmp/ccddODfo.s:190    .text._close_r:00000000 $t
+     /tmp/ccddODfo.s:195    .text._close_r:00000000 _close_r
+     /tmp/ccddODfo.s:230    .text._fstat_r:00000000 $t
+     /tmp/ccddODfo.s:235    .text._fstat_r:00000000 _fstat_r
+     /tmp/ccddODfo.s:288    .text._isatty_r:00000000 $t
+     /tmp/ccddODfo.s:293    .text._isatty_r:00000000 _isatty_r
+     /tmp/ccddODfo.s:324    .text._sbrk_r:00000000 $t
+     /tmp/ccddODfo.s:329    .text._sbrk_r:00000000 _sbrk_r
+     /tmp/ccddODfo.s:415    .text._sbrk_r:00000060 $d
+     /tmp/ccddODfo.s:422    .text._kill_r:00000000 $t
+     /tmp/ccddODfo.s:427    .text._kill_r:00000000 _kill_r
+     /tmp/ccddODfo.s:463    .text._getpid_r:00000000 $t
+     /tmp/ccddODfo.s:468    .text._getpid_r:00000000 _getpid_r
+     /tmp/ccddODfo.s:502    .text.__malloc_lock:00000000 $t
+     /tmp/ccddODfo.s:507    .text.__malloc_lock:00000000 __malloc_lock
+     /tmp/ccddODfo.s:535    .text.__malloc_unlock:00000000 $t
+     /tmp/ccddODfo.s:540    .text.__malloc_unlock:00000000 __malloc_unlock
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

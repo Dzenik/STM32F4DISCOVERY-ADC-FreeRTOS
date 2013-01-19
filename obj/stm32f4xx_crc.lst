@@ -380,24 +380,24 @@
  284              	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_crc.c
-     /tmp/cc3wb38c.s:25     .text.CRC_ResetDR:00000000 $t
-     /tmp/cc3wb38c.s:30     .text.CRC_ResetDR:00000000 CRC_ResetDR
-     /tmp/cc3wb38c.s:56     .text.CRC_ResetDR:00000014 $d
-     /tmp/cc3wb38c.s:61     .text.CRC_CalcCRC:00000000 $t
-     /tmp/cc3wb38c.s:66     .text.CRC_CalcCRC:00000000 CRC_CalcCRC
-     /tmp/cc3wb38c.s:100    .text.CRC_CalcCRC:00000020 $d
-     /tmp/cc3wb38c.s:105    .text.CRC_CalcBlockCRC:00000000 $t
-     /tmp/cc3wb38c.s:110    .text.CRC_CalcBlockCRC:00000000 CRC_CalcBlockCRC
-     /tmp/cc3wb38c.s:167    .text.CRC_CalcBlockCRC:00000048 $d
-     /tmp/cc3wb38c.s:172    .text.CRC_GetCRC:00000000 $t
-     /tmp/cc3wb38c.s:177    .text.CRC_GetCRC:00000000 CRC_GetCRC
-     /tmp/cc3wb38c.s:202    .text.CRC_GetCRC:00000010 $d
-     /tmp/cc3wb38c.s:207    .text.CRC_SetIDRegister:00000000 $t
-     /tmp/cc3wb38c.s:212    .text.CRC_SetIDRegister:00000000 CRC_SetIDRegister
-     /tmp/cc3wb38c.s:243    .text.CRC_SetIDRegister:0000001c $d
-     /tmp/cc3wb38c.s:248    .text.CRC_GetIDRegister:00000000 $t
-     /tmp/cc3wb38c.s:253    .text.CRC_GetIDRegister:00000000 CRC_GetIDRegister
-     /tmp/cc3wb38c.s:279    .text.CRC_GetIDRegister:00000014 $d
+     /tmp/ccLxuG3Y.s:25     .text.CRC_ResetDR:00000000 $t
+     /tmp/ccLxuG3Y.s:30     .text.CRC_ResetDR:00000000 CRC_ResetDR
+     /tmp/ccLxuG3Y.s:56     .text.CRC_ResetDR:00000014 $d
+     /tmp/ccLxuG3Y.s:61     .text.CRC_CalcCRC:00000000 $t
+     /tmp/ccLxuG3Y.s:66     .text.CRC_CalcCRC:00000000 CRC_CalcCRC
+     /tmp/ccLxuG3Y.s:100    .text.CRC_CalcCRC:00000020 $d
+     /tmp/ccLxuG3Y.s:105    .text.CRC_CalcBlockCRC:00000000 $t
+     /tmp/ccLxuG3Y.s:110    .text.CRC_CalcBlockCRC:00000000 CRC_CalcBlockCRC
+     /tmp/ccLxuG3Y.s:167    .text.CRC_CalcBlockCRC:00000048 $d
+     /tmp/ccLxuG3Y.s:172    .text.CRC_GetCRC:00000000 $t
+     /tmp/ccLxuG3Y.s:177    .text.CRC_GetCRC:00000000 CRC_GetCRC
+     /tmp/ccLxuG3Y.s:202    .text.CRC_GetCRC:00000010 $d
+     /tmp/ccLxuG3Y.s:207    .text.CRC_SetIDRegister:00000000 $t
+     /tmp/ccLxuG3Y.s:212    .text.CRC_SetIDRegister:00000000 CRC_SetIDRegister
+     /tmp/ccLxuG3Y.s:243    .text.CRC_SetIDRegister:0000001c $d
+     /tmp/ccLxuG3Y.s:248    .text.CRC_GetIDRegister:00000000 $t
+     /tmp/ccLxuG3Y.s:253    .text.CRC_GetIDRegister:00000000 CRC_GetIDRegister
+     /tmp/ccLxuG3Y.s:279    .text.CRC_GetIDRegister:00000014 $d
                      .debug_frame:00000010 $d
 
 NO UNDEFINED SYMBOLS

@@ -1297,10 +1297,10 @@
  644              	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_hash_md5.c
-     /tmp/cc8b1W87.s:25     .text.HASH_MD5:00000000 $t
-     /tmp/cc8b1W87.s:30     .text.HASH_MD5:00000000 HASH_MD5
-     /tmp/cc8b1W87.s:259    .text.HMAC_MD5:00000000 $t
-     /tmp/cc8b1W87.s:264    .text.HMAC_MD5:00000000 HMAC_MD5
+     /tmp/cc4XQ6cL.s:25     .text.HASH_MD5:00000000 $t
+     /tmp/cc4XQ6cL.s:30     .text.HASH_MD5:00000000 HASH_MD5
+     /tmp/cc4XQ6cL.s:259    .text.HMAC_MD5:00000000 $t
+     /tmp/cc4XQ6cL.s:264    .text.HMAC_MD5:00000000 HMAC_MD5
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS
